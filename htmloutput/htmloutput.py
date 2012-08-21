@@ -588,7 +588,10 @@ class HtmlOutput(Plugin):
         rmap = {}
         classes = []
         for n,t,o,e in result_list:
-            cls = t.test.__class__
+            if hasattr(t, 'test'):
+                cls = t.test.__class__
+            else:
+                cls = t.__class__
             if not rmap.has_key(cls):
                 rmap[cls] = []
                 classes.append(cls)
